@@ -10,14 +10,20 @@
 
         <preference name="phonegap-version" value="3.6.3" />
 
-        <name>Hotel App.xml</name>
+        <name>Hotel App</name>
 
         <description>
-        Aplicación de Reservas de Hotel 
+            Aplicación de Reservas de Hotel 
         </description>
 
         <author href="http://cenet.mx" email="you@youremail.com">
-       Alexandra Sánchez
+            Carlos Celma
         </author>
+        
         <gap:plugin name="org.apache.cordova.dialogs" />
+        <gap:plugin name="org.apache.cordova.media-capture" />
+        <gap:plugin name="org.apache.cordova.file-transfer" />
+        <gap:plugin name="org.apache.cordova.device" />
+        <gap:plugin name="org.apache.cordova.network-information"/>
+
     </widget>

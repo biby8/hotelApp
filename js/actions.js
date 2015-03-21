@@ -1,73 +1,68 @@
 var fn = {
     ready: function(){
-         document.addEventListener('deviceready',fn.init,false);
-        
+        document.addEventListener('deviceready',fn.init,false);
     },
     init: function(){
-        var x = false;
-        if(!x)
+        if(!almacenamiento.isRegistered())
             window.location.href = "#registro";
-       /* $('#registro').tap(fn.registrar);
+        $('#registro a:eq(0)').tap(capture.takePhoto);
+        $('#registro a:eq(1)').tap(fn.registrar);
+        fn.crearReserva();
     },
     registrar: function(){
-        //$('#nombre').val();
-       // $('#registro input').val();
-       // alert($('#registro input:eq(0)').val(););
+        var nom = $('#registro input:eq(0)').val();
+        var mail = $('#registro input:eq(1)').val();
+        var tel = $('#registro input:eq(2)').val();
+        var img = $('#registro a:eq(0)').attr('rel');
         
-         var nom=$('#registro input:eq(0)').val();
-             var mail=$('#registro input:eq(1)').val();
-         var tel=$('#registro input:eq(2)').val();
-                  alert(nom + ' - ' + mail + ' - ' + tel);
-        
-    }*/
-        $('#registro a:eq(1)').tap(fn.registrar);
+        if(nom != '' && mail != '' && tel != '' && img != '' && img != undefined)
+            server.sendData(nom,mail,tel,img);
+        else
+            navigator.notification.alert('Todos los campos son requeridos', null, 'Error de Datos','Aceptar');
     },
-       registrar: function(){
-        //$('#nombre').val();
-       // $('#registro input').val();
-       // alert($('#registro input:eq(0)').val(););
-        
-         var nom=$('#registro input:eq(0)').val();
-             var mail=$('#registro input:eq(1)').val();
-         var tel=$('#registro input:eq(2)').val();
-           
-           
-           
-           if(nom != '' && mail!='' && tel !='')
-               
-                  alert(nom + ' - ' + mail + ' - ' + tel);
-           else
-                  // alert('Todos los campos son requeridos');
-                  navigator.notification.alert('Todos los campus son requeridos',null,'Error de Datos','Aceptar');
-    }  
-        
+    
+  
+
+       crearReserva: function(){
+        var reserva = {
+            selecTH: function(){
+            if($(this).index() > 0){
+           // alert($(this).index());
+                //th hace referencia al tipo de habitación
+                $('#nr1').attr('th',$(this).index());
+                $('#nr1 ul:eq(0) li a').css('background','#f6f6f6');
+                $(this).find('a').css('background-color','#00dd00');
+                                  }
+            },
+                siguiente: function(){
+                                    // alert(4('#nr1').attr('th')); 
+                                        var th = $('#nr1').attr('th');
+                                        if(th !=undefined && th !='')
+                                            window.location.href='#nr2';
+                                    },
+                                        reservar: function(){
+                                            var th= $('#nr1').attr('th');
+                                           // var ha= $('#nr2 ul:eq(0) li:eq(1) select').val(); otra forma al de abajo
+                                             var ha= $('#nr2 ul:eq(0) select:eq(0)').val();
+                                              var pr= $('#nr2 ul:eq(0) select:eq(1)').val();
+                                              var di= $('#nr2 ul:eq(0) select:eq(2)').val();
+                                           // alert('x');
+                                             if(connection.isConnected())
+                                             alert(th + ' - ' + ha + ' - ' + pr + ' - ' + di
+                                             else
+                                                  
+                                                   almacenamiento.reservar(th,ha,pd,di);
+                                            
+                                        }
+                
+        // }
+
+     };  
+    $('#nr1 ul:eq(0) li').tap(reserva.selecTH);
+    $('#nr1 ul:eq(0) li:eq(1)').tap(reserva.siguiente);
+    $('#nr2 ul:eq(1) li:eq(1)').tap(reserva.reservar);
+    %('#historial').tap(almacenamiento.leerReservas);
+   }
 };
-
-//window.addEventListener("load",fn.init,false);
-// param1 nombre del evento
-// funcionalidad del evento
-// por default siempres false
-// jquery $(document).ready(fn.init);
-
-//function nombre=jQuery('#id',) simepre lleva parametros se llama selector(){}
-//nombre();
-
-//function nombre(){
-// return obj;
-//}
-
-//var nobj = nombre=jQuery();
-//nobj.ready();
-
-//document.html.body.h1.innerHTML='hola';
-//document.getElementbyId() = jQuery('#id');
-//Seleccionar la clase jQuery('.') 
-//Seleccionar el nombre de la clase jQuery('div')
-//Seleccionar el nombre del elemento jQUery('div[rel=ayuda]');
-//var nobj=$('div[rel=ayuda]');
-//var nobj=$(document);
-//nobj.ready(frameElement.init);//
-//$(document).ready(fn.init);
-    //nombre de la funcion : function()
-//$(fn.init);
+//$(fn.crearReserva);
 $(fn.ready);
